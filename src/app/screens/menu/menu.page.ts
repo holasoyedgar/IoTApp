@@ -29,7 +29,7 @@ export class MenuPage implements OnInit {
     {
       name: 'Historial',
       idItem: 10,
-      icon: 'archive'
+      icon: 'time'
     }
   ];
 

@@ -41,7 +41,7 @@ export class HistoryPage implements OnInit {
 
       // App logic to determine if all data is loaded
       // and disable the infinite scroll
-      if (this.histories.length == 1000) {
+      if (this.histories.length === 1000) {
         event.target.disabled = true;
       }
     }, 500);

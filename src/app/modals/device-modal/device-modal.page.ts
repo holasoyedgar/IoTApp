@@ -61,25 +61,28 @@ export class DeviceModalPage implements OnInit {
   }
 
   async saveDevice(data) {
-    const accessToken = await this.storage.get('access_token');
-    if (this.new) {
-      const response = await this.iotService.addDevice(data, accessToken);
-      if (response.status === 201) {
-        this.closeModal();
+    if (!isNaN(data.arduinoPin)) {
+      const accessToken = await this.storage.get('access_token');
+      if (this.new) {
+        const response = await this.iotService.addDevice(data, accessToken);
+        if (response.status === 201) {
+          this.closeModal();
+        } else {
+          const json = await response.json();
+          this.errorMessage = this.errorHandler.errorHandler(json.message);
+        }
       } else {
-        const json = await response.json();
-        this.errorMessage = this.errorHandler.errorHandler(json.message);
+        const response = await this.iotService.updateDevice(data, this.deviceId, accessToken);
+        if (response.status === 200) {
+          this.closeModal();
+        } else {
+          const json = await response.json();
+          this.errorMessage = this.errorHandler.errorHandler(json.message);
+        }
       }
     } else {
-      const response = await this.iotService.updateDevice(data, this.deviceId, accessToken);
-      if (response.status === 200) {
-        this.closeModal();
-      } else {
-        const json = await response.json();
-        this.errorMessage = this.errorHandler.errorHandler(json.message);
-      }
+      this.errorMessage = 'El número de pin no es numérico';
     }
-    console.log(data);
 
   }
 }
