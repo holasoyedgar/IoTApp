@@ -1,0 +1,36 @@
+<ion-app>
+  <ion-split-pane contentId="main-content">
+    <ion-menu contentId="main-content" type="overlay">
+      <ion-content>
+        <ion-list id="inbox-list">
+          <ion-list-header>Menú</ion-list-header>
+          <ion-note>Cliente IoT</ion-note>
+
+          <ion-menu-toggle *ngFor="let item of menuItems">
+            <ion-item (click)="clickMenu(item, $event)" lines="none">
+              <ion-icon slot="start" [ios]="item.icon + '-outline'" [md]="item.icon + '-sharp'"></ion-icon>
+              <ion-label>{{ item.name }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+      <div class="footerMenu">
+        <ion-list lines="none">
+          <ion-item>
+            <ion-icon name="person" slot="start">
+            </ion-icon>
+            {{ username }}
+          </ion-item>
+
+          <ion-item (click)="logout()">
+            <ion-icon name="log-out" color="danger" slot="start">
+            </ion-icon>
+            Cerrar sesión
+          </ion-item>
+        </ion-list>
+      </div>
+
+    </ion-menu>
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>

@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Configurar dispositivo</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon class="icon" name="close" (click)="closeModal()">
+      </ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="deviceForm" (ngSubmit)="saveDevice(deviceForm.value)">
+    <ion-grid>
+      <ion-row>
+        <ion-item lines="none">
+          <ion-grid>
+            <ion-row>
+              <ion-label position="floating">
+                Descripción del dispositivo
+              </ion-label>
+              <ion-input formControlName="deviceDescription"></ion-input>
+            </ion-row>
+            <ion-row>
+              <div class="validation-error">
+                <ng-container *ngFor="let validation of validationMessages.deviceDescription">
+                  <div
+                    *ngIf="deviceForm.get('deviceDescription').hasError(validation.type) && (deviceForm.get('deviceDescription').dirty || deviceForm.get('deviceDescription').touched) ">
+                    {{validation.message}}
+                  </div>
+                </ng-container>
+              </div>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-item lines="none">
+          <ion-grid>
+            <ion-row>
+              <ion-label position="floating">
+                Pin del Arduino conectado
+              </ion-label>
+              <ion-input formControlName="arduinoPin"></ion-input>
+            </ion-row>
+            <ion-row>
+              <div class="validation-error">
+                <ng-container *ngFor="let validation of validationMessages.arduinoPin">
+                  <div
+                    *ngIf="deviceForm.get('arduinoPin').hasError(validation.type) && (deviceForm.get('arduinoPin').dirty || deviceForm.get('arduinoPin').touched) ">
+                    {{validation.message}}
+                  </div>
+                </ng-container>
+              </div>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-row>
+    </ion-grid>
+    {{ errorMessage }}
+    <ion-button expand="full" shape="round" type="submit" [disabled]="deviceForm.invalid">
+      GUARDAR
+    </ion-button>
+  </form>
+</ion-content>

@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  API_URL: 'http://localhost:3000/v1/api',
+  ARDUINO_KEY: '84b5b2ffecdb25fa8c50faff7556da32',
 };
 
 /*

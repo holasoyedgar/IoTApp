@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar sesión</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content text-center>
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label position="floating">
+                <ion-icon name="person"> </ion-icon>
+                Usuario
+              </ion-label>
+              <ion-input class="input" formControlName="username"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="validation-error">
+            <ng-container *ngFor="let validation of validationMessages.username">
+              <div *ngIf="loginForm.get('username').hasError(validation.type) && (loginForm.get('username').dirty || loginForm.get('username').touched) ">
+                <ion-label>
+                  {{validation.message}}
+                </ion-label>
+              </div>
+            </ng-container>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label position="floating">
+                Contraseña
+              </ion-label>
+              <ion-input class="input" type="password" formControlName="password"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <div class="validation-error">
+            <ng-container *ngFor="let validation of validationMessages.password">
+              <div *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched) ">
+                <ion-label>
+                  {{validation.message}}
+                </ion-label>
+              </div>
+            </ng-container>
+          </div>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <div class="validation-error">
+      {{errorMessage}}
+    </div>
+    <ion-row>
+      <ion-col>
+        <ion-button color="success" [disabled]="loginForm.invalid" type="submit" expand="full">
+          <ion-icon name="power">        
+          </ion-icon>
+          <ion-label>
+            Iniciar sesión
+          </ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    
+  </form>
+</ion-content>
