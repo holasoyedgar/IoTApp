@@ -5,7 +5,7 @@ import { AuthGuard } from './guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'menu',
     pathMatch: 'full'
   },
   {
@@ -20,10 +20,6 @@ const routes: Routes = [
     path: 'menu',
     loadChildren: () => import('./screens/menu/menu.module').then( m => m.MenuPageModule),
     canActivate: [AuthGuard]
-  },
-  {
-    path: 'device-modal',
-    loadChildren: () => import('./modals/device-modal/device-modal.module').then( m => m.DeviceModalPageModule)
   }
 ];
 

@@ -13,7 +13,7 @@ import { ErrorHandler } from 'src/app/utils/error.handler';
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
   validationMessages = {
-    user: [
+    username: [
       {
         type: 'required',
         message: 'El usuario es requerido'
